@@ -18,9 +18,6 @@ RUN apt-get install -y poppler-utils
 # Set working directory
 WORKDIR /app
 
-# Copy requirements into the container at /app
-COPY requirements.txt ./
-
 RUN mkdir src && cd /app/src && \
     wget https://github.com/tesseract-ocr/tesseract/archive/5.0.0-alpha-20201224.zip && \
 	unzip 5.0.0-alpha-20201224.zip && \
@@ -32,8 +29,6 @@ RUN mkdir src && cd /app/src && \
 ENV TESSDATA_PREFIX=/usr/local/share/tessdata
 
 RUN apt-get install -y poppler-utils
-# Install libraries using pip installer
-RUN pip3 install -r requirements.txt
 
 # Set the locale
 RUN apt-get install -y locales && locale-gen en_US.UTF-8
